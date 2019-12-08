@@ -20,7 +20,9 @@ export default {
       hasLogin: false
     }
   },
-  created () {
+  beforeRouteUpdate () {
+    console.log('------beforeRouteEnter ---11--')
+    console.log(this.$route)
     if (window.sessionStorage.account) {
       this.hasLogin = true
     }

@@ -6,12 +6,16 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path: '/',
+      component: r => require(['@/pages/home'], r)
+    },
+    {
       path: '/helloWorld',
       component: r => require(['@/pages/helloWorld'], r)
     },
     {
-      path: '/',
-      component: r => require(['@/pages/home'], r)
+      path: '/controll',
+      component: r => require(['@/pages/controll'], r)
     }
   ]
 })
