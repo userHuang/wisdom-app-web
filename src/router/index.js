@@ -16,6 +16,10 @@ export default new Router({
     {
       path: '/controll',
       component: r => require(['@/pages/controll'], r)
+    },
+    {
+      path: '/skyApp',
+      component: r => require(['@/pages/skyApp'], r)
     }
   ]
 })

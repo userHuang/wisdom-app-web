@@ -1,13 +1,14 @@
 <template>
-  <div>
-    <canvas ref="mycanvas" :width="cWidth" :height="cHeight"></canvas>
+  <div class="canvas-page">
+    <canvas ref="canvasBattery" :width="cWidth" :height="cHeight"></canvas>
   </div>
 </template>
 <script>
+
 export default {
   name: 'Battery',
 
-  mycanvas: null,
+  canvasBattery: null,
   ctx: null,
   myInterval: null,
   props: {
@@ -44,8 +45,8 @@ export default {
   },
 
   mounted () {
-    this.mycanvas = this.$refs.mycanvas
-    this.ctx = this.mycanvas.getContext('2d')
+    this.canvasBattery = this.$refs.canvasBattery
+    this.ctx = this.canvasBattery.getContext('2d')
     this.drawBg()
     this.proQuantity = this.proQuantity > 100 ? 100 : this.proQuantity
     this.drawPath(this.proQuantity)

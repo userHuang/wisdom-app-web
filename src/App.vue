@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <div class="app-page">
+  <div id="app" :style="homeBg">
+    <div class="app-page" :style="coveredBg">
       <nav-header />
       <router-view/>
     </div>
@@ -9,22 +9,37 @@
 
 <script>
 import NavHeader from '@/components/common/Header'
+import homeBgImage from '@/assets/image/home.jpg'
+import coveredImage from '@/assets/image/covered.png'
 
 export default {
   name: 'App',
   components: {
     NavHeader
   },
+
   data () {
     return {
-      hasLogin: false
+      homeBg: '',
+      coveredBg: '',
+      coveredImage,
+      route2homeStyle: {
+        '/': `background-image: url("${homeBgImage}")`,
+        '/controll': 'background: linear-gradient(135deg,rgba(77,84,93,1) 0%,rgba(25,29,35,1) 100%)',
+        '/skyApp': 'background: linear-gradient(135deg,rgba(77,84,93,1) 0%,rgba(25,29,35,1) 100%)'
+
+      }
     }
   },
-  beforeRouteUpdate () {
-    console.log('------beforeRouteEnter ---11--')
-    console.log(this.$route)
-    if (window.sessionStorage.account) {
-      this.hasLogin = true
+
+  watch: {
+    $route (route) {
+      console.log(route.path,'====route====')
+      this.$nextTick(() => {
+        this.homeBg = this.route2homeStyle[route.path]
+        this.coveredBg = route.path === '/' ? `background-image: url("${this.coveredImage}")` : ''
+        console.log(this.coveredBg, '--this.coveredBg--')
+      })
     }
   }
 }
@@ -38,11 +53,13 @@ export default {
   color: #2c3e50;
   width: 720px;
   height: 720px;
-  background: url("./assets/image/home.jpg") no-repeat;
+  background-repeat: no-repeat;
 }
 .app-page{
   width: 100%;
   height: 100%;
-  background: url("./assets/image/covered.png") no-repeat;
+}
+a {
+  text-decoration: none;
 }
 </style>

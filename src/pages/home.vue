@@ -4,11 +4,9 @@
       <Slide class="slide-one">
         <home-card></home-card>
       </Slide>
-      <div @touchstart="s" @touchmove="m" @touchend="e">
-        <Slide class="slide-two"  >
-          <message-card></message-card>
-        </Slide>
-      </div>
+      <Slide class="slide-two"  >
+        <message-card></message-card>
+      </Slide>
       <Slide class="slide-three">
         3
       </Slide>
@@ -72,20 +70,6 @@ export default {
 
   created () {
     console.log('-----created------')
-  },
-
-  methods: {
-    s () {
-      console.log('touchstart')
-    },
-
-    m (e) {
-      console.log('m')
-    },
-
-    e () {
-      console.log('touchend')
-    }
   }
 }
 </script>

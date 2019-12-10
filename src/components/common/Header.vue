@@ -17,7 +17,6 @@
   .header-page{
     height: 60px;
     line-height: 60px;
-    color:rgba(255,255,255,1);
     text-align: left;
     font-size: 0;
 
@@ -27,6 +26,7 @@
       font-weight: 400;
       font-family: DINPro-Regular,DINPro;
       margin-left: 20px;
+      color: #b4b9c5;
     }
     
     .status-icons{

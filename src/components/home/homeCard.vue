@@ -9,10 +9,12 @@
     </div>
     <div class="app-info">
       <div class="item" v-for="item in appData" :key="item.name">
-        <span class="img">
-          <img :src="item.src" alt="icon"/>
-        </span>
-        <title class="device-name">{{item.name}}</title>
+        <router-link :to="`${item.url}`">
+          <span class="img">
+            <img :src="item.src" alt="icon"/>
+          </span>
+          <title class="device-name">{{item.name}}</title>
+        </router-link>
       </div>
     </div>
   </div>
@@ -95,7 +97,8 @@ export default {
     return {
       appData: [{
         name: '小维智联',
-        src: xiaoweiIcon
+        src: xiaoweiIcon,
+        url: '/skyApp'
       }, {
         name: '应用服务',
         src: deviceIcon
