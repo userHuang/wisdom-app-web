@@ -19,9 +19,7 @@
 export default {
   methods: {
     closed () {
-      this.$router.replace({
-        path: '/'
-      })
+      this.$router.go(-1)
     }
   }
 }

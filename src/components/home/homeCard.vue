@@ -101,10 +101,12 @@ export default {
         url: '/skyApp'
       }, {
         name: '应用服务',
-        src: deviceIcon
+        src: deviceIcon,
+        url: '/systemApp'
       }, {
         name: '系统设置',
-        src: systemIcon
+        src: systemIcon,
+        url: '/settings'
       }]
     }
   }

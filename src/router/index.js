@@ -10,16 +10,20 @@ export default new Router({
       component: r => require(['@/pages/home'], r)
     },
     {
-      path: '/helloWorld',
-      component: r => require(['@/pages/helloWorld'], r)
-    },
-    {
       path: '/controll',
       component: r => require(['@/pages/controll'], r)
     },
     {
       path: '/skyApp',
       component: r => require(['@/pages/skyApp'], r)
+    },
+    {
+      path: '/systemApp',
+      component: r => require(['@/pages/systemApp'], r)
+    },
+    {
+      path: '/settings',
+      component: r => require(['@/pages/personalSet'], r)
     }
   ]
 })

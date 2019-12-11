@@ -5,6 +5,9 @@
         <img :src="item.src" alt="icon"/>
       </span>
       <title class="device-name">{{item.name}}</title>
+      <span class="nums" v-if="item.name === '最新留言' && item.num">
+        <num-tips :value="item.num"></num-tips>
+      </span>
     </div>
   </div>
 </template>
@@ -26,6 +29,7 @@
       line-height: 160px;
       margin-bottom: 20px;
       background:rgba(255,255,255,0.05);
+      position: relative;
 
       .img {
         display: inline-block;
@@ -43,17 +47,29 @@
         color: #FFF;
         vertical-align: top;
       }
+
+      .nums {
+        position: absolute;
+        display: inline-block;
+        right: 40px;
+        top: 60px;
+      }
     }
   }
 </style>
 
 <script>
+import NumTips from '@/components/common/NumTips'
 import updateIcon from '@/assets/image/update_icon.png'
 import messageIcon from '@/assets/image/message_icon.png'
 import tipsIcon from '@/assets/image/tips_icon.png'
 
 export default {
   name: 'MessageCard',
+
+  components: {
+    NumTips
+  },
 
   data () {
     return {
@@ -62,7 +78,8 @@ export default {
         src: updateIcon
       }, {
         name: '最新留言',
-        src: messageIcon
+        src: messageIcon,
+        num: 4
       }, {
         name: '微波炉预约已取消',
         src: tipsIcon
