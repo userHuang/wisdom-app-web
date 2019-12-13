@@ -5,9 +5,17 @@
     </router-link>
     <span class="name">{{breadData.name}}</span>
     <div class="controll" v-show="sidebar">
-      <span class="share" @click="share">...</span>
+      <span class="share" @click="share">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </span>
       <span class="divide"></span>
-      <span class="back-home" @click="backHome">X</span>
+      <router-link :to="`${backUrl}`">
+        <span class="back-home">
+          <span class="icon">+</span>
+        </span>
+      </router-link>
     </div>
   </div>
 </template>
@@ -56,16 +64,48 @@
         height: 60px;
         color: #FFF;
         display: inline-block;
-        font-size: 20px;
+        font-size: 0px;
       }
       .share {
         border-radius: 30px 0px 0px 30px;
         float: left;
+
+        .dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 6px;
+          display: inline-block;
+          background: #FFF;
+          vertical-align: middle;
+          margin-right: 5px;
+        }
+
+        .dot:nth-child(2) {
+          width: 8px;
+          height: 8px;
+          border-radius: 8px;
+        }
+        
+        .dot:nth-child(3) {
+          margin-right: 0px;
+        }
       }
 
       .back-home {
         border-radius: 0px 30px 30px 0px;
         float: right;
+
+        .icon {
+          width: 24px;
+          height: 24px;
+          display: inline-block;
+          line-height: 24px;
+          border-radius: 30px;
+          border: 3px solid #FFF;
+          font-size: 29px;
+          transform: rotate(45deg);
+          margin-top: 15px;
+        }
       }
 
       .divide {
@@ -90,7 +130,11 @@ export default {
     },
     sidebar: {
       type: Boolean,
-      default: true
+      default: false
+    },
+    backUrl: {
+      type: String,
+      default: '/'
     }
   },
   methods: {

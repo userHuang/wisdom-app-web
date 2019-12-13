@@ -70,15 +70,8 @@ export default {
   },
 
   methods: {
-    click () {
-      console.log('click')
-      this.$router.push({
-        path: '/controll'
-      })
-    },
     down () {
-      console.log('down')
-      this.flags = true;
+      this.flags = true
       const touch = event.touches ? event.touches[0] : event
       this.position.x = touch.clientX
       this.position.y = touch.clientY
@@ -93,17 +86,12 @@ export default {
         const ny = touch.clientY - this.position.y
         const xPum = this.downX + nx
         const yPum = this.downY + ny
-        console.log(xPum, yPum)
         if (xPum < -5 || xPum > 625 || yPum < -5 || yPum > 625) {
           return
         }
         const moveDiv = this.$refs.moveDiv
         moveDiv.style.left = xPum + 'px'
         moveDiv.style.top = yPum  + 'px'
-        //阻止页面的滑动默认事件
-        // document.addEventListener('touchmove', function () { // 1.2 如果碰到滑动问题，请注意是否获取到 touchmove
-        //   event.stopPropagation();
-        // },false)
       }
     },
     //鼠标释放时候的函数
