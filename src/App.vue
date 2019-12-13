@@ -2,8 +2,11 @@
   <div id="app" :style="homeBg">
     <div class="app-page" :style="coveredBg">
       <move-btn v-show="curPath !== '/controll'"></move-btn>
-      <nav-header />
-      <router-view/>
+      <nav-header></nav-header>
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+      <router-view v-if="!$route.meta.keepAlive"></router-view>
     </div>
   </div>
 </template>

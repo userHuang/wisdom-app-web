@@ -45,16 +45,24 @@
       },
       showIndicator: {
         default: true
+      },
+      targetIndex: {
+        default: 1
       }
     },
+
+    created () {
+      this.index = this.targetIndex
+    },
+
     mounted() {
       this.className = `wh_swiper_${Math.random().toFixed(3) * 1000}`
       setTimeout(() => {
         //克隆dom
         this.starDom()
-        this.dom.transform = `translate3d(${this._width * -1}px, 0px, 0px)`
-        this.dom['-webkit-transform'] = `translate3d(${this._width * -1}px, 0px, 0px)`
-        this.dom['-ms-transform'] = `translate3d(${this._width * -1}px, 0px, 0px)`
+        this.dom.transform = `translate3d(${this._width * -this.index}px, 0px, 0px)`
+        this.dom['-webkit-transform'] = `translate3d(${this._width * -this.index}px, 0px, 0px)`
+        this.dom['-ms-transform'] = `translate3d(${this._width * -this.index}px, 0px, 0px)`
         if (this.autoPlay) {
           this.setTime()
         }

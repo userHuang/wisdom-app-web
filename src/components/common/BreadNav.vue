@@ -4,6 +4,11 @@
       <span class="back"></span>
     </router-link>
     <span class="name">{{breadData.name}}</span>
+    <div class="controll" v-show="sidebar">
+      <span class="share" @click="share">...</span>
+      <span class="divide"></span>
+      <span class="back-home" @click="backHome">X</span>
+    </div>
   </div>
 </template>
 
@@ -15,6 +20,7 @@
     text-align: center;
     color: #FFF;
     font-size: 0px;
+    position: relative;
 
     .back {
       width: 80px;
@@ -32,14 +38,68 @@
       font-size: 36px;
       vertical-align: top;
     }
+
+    .controll {
+      width: 151px;
+      display: inline-block;
+      border-radius: 30px;
+      height: 60px;
+      position: absolute;
+      right: 25px;
+      top: 10px;
+      border: 1px solid rgba(67,71,78,1);
+      background: rgba(0,0,0,0.1);
+      line-height: 60px;
+
+      .share, .back-home {
+        width: 75px;
+        height: 60px;
+        color: #FFF;
+        display: inline-block;
+        font-size: 20px;
+      }
+      .share {
+        border-radius: 30px 0px 0px 30px;
+        float: left;
+      }
+
+      .back-home {
+        border-radius: 0px 30px 30px 0px;
+        float: right;
+      }
+
+      .divide {
+        width: 1px;
+        height: 30px;
+        background: rgba(255,255,255,0.15);
+        display: inline-block;
+        float: left;
+        vertical-align: top;
+        margin-top: 15px;
+      }
+    }
   }
 </style>
 
 <script>
 export default {
   props: {
-    breadData: {},
-    default: () => {}
+    breadData: {
+      type: Object,
+      default: () => {}
+    },
+    sidebar: {
+      type: Boolean,
+      default: true
+    }
+  },
+  methods: {
+    share () {
+      console.log('----share--')
+    },
+    backHome () {
+      console.log('----backHome--')
+    }
   }
 }
 </script>

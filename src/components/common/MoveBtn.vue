@@ -1,12 +1,13 @@
 <template>
   <div class="move-btn-component" :class="{'active': flags}" ref="moveDiv"
     @touchstart="down"
-    @click="click"
     @touchmove.prevent="move"
     @touchend="end"
   >
-    <span class="mid"></span>
-    <span class="out"></span>
+    <router-link :to="`/controll`">
+      <span class="mid"></span>
+      <span class="out"></span>
+    </router-link>
   </div>
 </template>
 

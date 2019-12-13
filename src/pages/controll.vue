@@ -13,7 +13,7 @@
       />
     </div>
     <div class="volume">
-      <img :src="volumeIcon"  alt="icon"/>
+      <img :src="getVolumeIcon"  alt="icon"/>
       <van-slider
         v-model="volumeValue"
         bar-height="100px"
@@ -73,6 +73,7 @@
         }
 
         .van-slider__bar {
+          opacity: 0.5;
           background: linear-gradient(225deg,rgba(144,148,160,1) 0%,rgba(65,70,77,1) 100%);
         }
 
@@ -89,7 +90,6 @@
         top: 0px;
         width: 100px;
         height: 100px;
-        z-index: 99;
       }
     }
 
@@ -110,6 +110,7 @@ import homeIcon from '@/assets/image/home.png'
 import networkIcon from '@/assets/image/network.png'
 import brightnessIcon from '@/assets/image/brightness.png'
 import volumeIcon from '@/assets/image/volume.png'
+import unVolumeIcon from '@/assets/image/unVolume.png'
 
 export default {
   name: 'Controll',
@@ -123,6 +124,7 @@ export default {
     return {
       brightnessIcon,
       volumeIcon,
+      unVolumeIcon,
       datas: [{
         src: dndIcon,
         isOpened: false
@@ -138,6 +140,12 @@ export default {
       }],
       brightValue: 20,
       volumeValue: 70
+    }
+  },
+
+  computed: {
+    getVolumeIcon () {
+      return this.volumeValue === 0 ? this.unVolumeIcon : this.volumeIcon 
     }
   },
 

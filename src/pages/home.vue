@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <Swiper :autoPlay='false'>
+    <Swiper :autoPlay='false' :targetIndex="targetIndex" @transtionend="transtionend">
       <Slide class="slide-one">
         <home-card></home-card>
       </Slide>
@@ -11,6 +11,7 @@
         3
       </Slide>
     </Swiper>
+    
   </div>
 </template>
 
@@ -64,12 +65,25 @@ export default {
 
   data () {
     return {
-      text: 'Home'
+      targetIndex: 1
     }
   },
 
   created () {
-    console.log('-----created------')
+    this.targetIndex = this.$route.query.id || 1
+  },
+
+  methods: {
+    transtionend (index) {
+      const id = this.$route.query.id || 1
+      if (parseInt(id) === (index + 1)) {
+        return
+      }
+      this.$router.push({
+        path: '/', 
+        query: {id: index + 1}
+      })
+    }
   }
 }
 </script>

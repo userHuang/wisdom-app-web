@@ -7,11 +7,17 @@ export default new Router({
   routes: [
     {
       path: '/',
+      meta: {
+        keepAlive: true // 需要缓存
+      },
       component: r => require(['@/pages/home'], r)
     },
     {
       path: '/controll',
-      component: r => require(['@/pages/controll'], r)
+      component: r => require(['@/pages/controll'], r),
+      meta: {
+        keepAlive: true // 需要缓存
+      }
     },
     {
       path: '/skyApp',

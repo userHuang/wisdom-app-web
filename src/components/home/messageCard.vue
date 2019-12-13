@@ -20,8 +20,6 @@
     font-size: 0;
     padding: 40px 30px;
     overflow: scroll;
-    margin-right: -10px;
-    padding-right: 40px;
 
     .card-item {
       width: 660px;
