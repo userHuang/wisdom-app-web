@@ -30,6 +30,10 @@ export default new Router({
     {
       path: '/settings',
       component: r => require(['@/pages/personalSet'], r)
+    },
+    {
+      path: '/washingMachine',
+      component: r => require(['@/pages/deviceDetail/washingMachine'], r)
     }
   ]
 })

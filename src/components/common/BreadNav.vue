@@ -1,8 +1,6 @@
 <template>
   <div class="bread-nav-component">
-    <router-link :to="`${breadData.url}`">
-      <span class="back"></span>
-    </router-link>
+    <span class="back" @click="goBack"></span>
     <span class="name">{{breadData.name}}</span>
     <div class="controll" v-show="sidebar">
       <span class="share" @click="share">
@@ -11,7 +9,7 @@
         <span class="dot"></span>
       </span>
       <span class="divide"></span>
-      <router-link :to="`${backUrl}`">
+      <router-link :to="`${closeUrl}`">
         <span class="back-home">
           <span class="icon">+</span>
         </span>
@@ -132,17 +130,17 @@ export default {
       type: Boolean,
       default: false
     },
-    backUrl: {
+    closeUrl: {
       type: String,
       default: '/'
     }
   },
   methods: {
+    goBack () {
+      this.$router.go(-1)
+    },
     share () {
       console.log('----share--')
-    },
-    backHome () {
-      console.log('----backHome--')
     }
   }
 }

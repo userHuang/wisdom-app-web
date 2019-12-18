@@ -2,10 +2,10 @@
   <div class="sky-app-page">
     <bread-nav :bread-data="breadData"></bread-nav>
     <div class="device">
-      <div class="item" v-for="item in deviceData" :key="item.name">
+      <div class="item" v-for="item in deviceData" :key="item.name" @click="goDetail(item)">
         <span class="name">{{item.name}}</span>
         <span class="status" :class="{'active': item.status === '在线'}">{{item.status}}</span>
-        <img class="icon" :src="item.src" alt="icon"/>
+        <img class="icon" :src="item.icon" alt="icon"/>
       </div>
     </div>
   </div>
@@ -103,34 +103,45 @@ export default {
         url: '/'
       },
       deviceData: [{
-        name: '电烤箱',
+        name: '洗衣机',
         status: '离线',
-        src: systemIcon
+        icon: systemIcon,
+        src: '/washingMachine'
       }, {
         name: '煤气热水器',
         status: '离线',
-        src: systemIcon
+        icon: systemIcon,
+        src: '/washingMachine'
       }, {
         name: '行车记录仪',
         status: '在线',
-        src: systemIcon
+        icon: systemIcon,
+        src: '/washingMachine'
       }, {
         name: '扫地机器人',
         status: '离线',
-        src: systemIcon
+        icon: systemIcon
       }, {
         name: '智能风扇',
         status: '在线',
-        src: systemIcon
+        icon: systemIcon
       }, {
         name: '呼叫铃',
         status: '离线',
-        src: systemIcon
+        icon: systemIcon
       }, {
         name: '净化器',
         status: '离线',
-        src: systemIcon
+        icon: systemIcon
       }]
+    }
+  },
+
+  methods: {
+    goDetail (item) {
+      this.$router.push({
+        path: item.src
+      })
     }
   }
 }
