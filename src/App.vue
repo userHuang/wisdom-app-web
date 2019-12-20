@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import vuexStore from './store'
 import MoveBtn from '@/components/common/MoveBtn'
 import NavHeader from '@/components/common/Header'
 import homeBgImage from '@/assets/image/home.jpg'
@@ -23,6 +24,8 @@ export default {
     NavHeader,
     MoveBtn
   },
+
+  store: vuexStore,
 
   data () {
     return {

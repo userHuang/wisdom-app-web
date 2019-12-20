@@ -2,16 +2,15 @@
   <div class="home-page">
     <Swiper :autoPlay='false' :targetIndex="targetIndex" @transtionend="transtionend">
       <Slide class="slide-one">
-        <home-card></home-card>
+        
       </Slide>
       <Slide class="slide-two"  >
-        <message-card></message-card>
+        <home-card></home-card>
       </Slide>
       <Slide class="slide-three">
-        3
+        <message-card></message-card>
       </Slide>
     </Swiper>
-    
   </div>
 </template>
 
@@ -52,6 +51,13 @@ import Swiper from '@/components/common/Swiper'
 import Slide from '@/components/common/Slide'
 import HomeCard from '@/components/home/homeCard'
 import MessageCard from '@/components/home/MessageCard'
+import Service from '@/services/contract'
+import { mapGetters, mapActions } from 'vuex'
+
+const name2card = {
+  'HomeCard': HomeCard,
+  'MessageCard': MessageCard
+}
 
 export default {
   name: 'Home',
@@ -71,9 +77,28 @@ export default {
 
   created () {
     this.targetIndex = this.$route.query.id || 1
+    this.init()
+  },
+
+  computed: {
+    // 通过vuex获取数据
+    ...mapGetters('ceshi', ['getVoiceprompt']),
   },
 
   methods: {
+    ...mapActions('ceshi', ['getList']),
+
+    // 直接调接口
+    async init () {
+      const res = await Service.getDetail({
+        key: 'voiceprompt'
+      })
+
+      // 通过vuex存储数据
+      this.getList({
+        key: 'voiceprompt'
+      })
+    },
     transtionend (index) {
       const id = this.$route.query.id || 1
       if (parseInt(id) === (index + 1)) {
@@ -84,6 +109,10 @@ export default {
         query: {id: index + 1}
       })
     }
+  },
+
+  mounted () {
+    console.log(this.getVoiceprompt(), '======vux======')
   }
 }
 </script>
