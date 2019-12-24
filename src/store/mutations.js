@@ -6,6 +6,7 @@ export const SET_USER = function (state, user) {
   state.app.userInfo = user
 }
 
-export const SET_PAGE_INFO = function (state, info) {
-  state.pageInfo = info
+export const SET_CURRENT_DEVICE = function (state, device) {
+  console.log(device, 'SET_CURRENT_DEVICE')
+  state.app.currentDevice = device
 }

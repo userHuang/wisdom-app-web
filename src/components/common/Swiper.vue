@@ -162,6 +162,10 @@
         }, this.interval)
       },
       starDom() {
+        if (!document.querySelector('.' + this.className)) {
+          this.clearTimeOut()
+          return
+        }
         var SlideDom = document.querySelector('.' + this.className).getElementsByClassName('wh_slide')
         this.slidesLength = SlideDom.length
         if (this.slidesLength > 1) {

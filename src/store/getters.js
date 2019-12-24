@@ -1,1 +1,1 @@
-export const getMetadata = state => state.Metadata
+export const getCurrentDevice = state => state.app.currentDevice

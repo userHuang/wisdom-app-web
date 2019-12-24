@@ -5,14 +5,17 @@ const state = {}
 
 const getters = {
   getVoiceprompt: (state) => () => {
-    return state['voiceprompt'] || {}
+    return state['voiceprompt'] || {
+      name: 'HomeCard'
+    }
   }
 }
 
 const mutations = {
-  setHistory (state, voiceprompt) {
+  setPrompt (state, data) {
+    console.log(data, 'voiceprompt')
     Vue.set(state, 'voiceprompt', [
-      voiceprompt
+      data.voiceprompt
     ])
   }
 }
@@ -20,7 +23,7 @@ const mutations = {
 const actions = {
   async getList ({commit}, data) {
     const res = await Service.getDetail(data)
-    commit('setHistory', {voiceprompt: res.data})
+    commit('setPrompt', {voiceprompt: res.data})
   }
 }
 

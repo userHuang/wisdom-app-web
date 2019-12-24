@@ -9,3 +9,9 @@ export const setUser = ({
 }, user) => {
   commit('SET_USER', user)
 }
+
+export const setCurrentDevice = ({
+  commit
+}, device) => {
+  commit('SET_CURRENT_DEVICE', device)
+}

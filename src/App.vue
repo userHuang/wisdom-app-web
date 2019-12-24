@@ -12,11 +12,13 @@
 </template>
 
 <script>
-import vuexStore from './store'
+// import vuexStore from './store'
 import MoveBtn from '@/components/common/MoveBtn'
 import NavHeader from '@/components/common/Header'
 import homeBgImage from '@/assets/image/home.jpg'
 import coveredImage from '@/assets/image/covered.png'
+// import './eventServer'
+import '@/util/eventSource'
 
 export default {
   name: 'App',
@@ -25,7 +27,7 @@ export default {
     MoveBtn
   },
 
-  store: vuexStore,
+  // store: vuexStore,
 
   data () {
     return {
@@ -33,6 +35,7 @@ export default {
       homeBg: '',
       coveredBg: '',
       coveredImage,
+      hasDevice: false,
       route2homeStyle: {
         '/': `background-image: url("${homeBgImage}")`,
         '/common': 'background: linear-gradient(135deg,rgba(77,84,93,1) 0%,rgba(25,29,35,1) 100%)',
@@ -40,8 +43,34 @@ export default {
     }
   },
 
+  created () {
+    const EventSource = window.EventSource || NativeEventSource || EventSourcePolyfill
+    const es = new EventSource("http://192.168.4.126:8081/events.php")
+
+    es.addEventListener('message', (e) => {
+      if (e) {
+        const data = JSON.parse(e.data)
+        this.$store.dispatch('setCurrentDevice', Object.assign({}, {
+          deviceName: data.name
+        }))
+        if (data.name) {
+          this.hasDevice = true
+          this.homeBg = this.route2homeStyle['/common']
+          this.coveredBg = ''
+        } else {
+          this.hasDevice = false
+        }
+      } else {
+        this.hasDevice = false
+      }
+    })
+  },
+
   watch: {
     $route (route) {
+      if (this.hasDevice) {
+        return
+      }
       this.$nextTick(() => {
         this.curPath = route.path
         this.homeBg = route.path in this.route2homeStyle ? this.route2homeStyle[route.path] : this.route2homeStyle['/common']
