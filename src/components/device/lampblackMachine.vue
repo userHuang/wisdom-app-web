@@ -10,6 +10,16 @@
         <span class="name">照明</span>
       </div>
     </section>
+    <section class="model">
+      <div class="btn-style"
+        :class="item.isActive ? `${item.className} active` : `${item.className}`"
+        v-for="item in modelDatas"
+        :key="item.name"
+        @click.prevent="selectModel(item)">
+          <span class="img"></span>
+          <span class="name">{{item.name}}</span>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -24,6 +34,7 @@
       border-radius: 180px;
       background: rgba(255,255,255,0.05);
       text-align: center;
+      display: inline-block;
 
       .img {
         width: 56px;
@@ -47,52 +58,59 @@
       }
     }
 
-    .switch {
-      display: inline-block;
+    .light {
+      float: right;
     }
 
-    .light {
-      display: inline-block;
-      float: right;
+    .model {
+      width: 600px;
+      height: 180px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 90px;
+      margin-top: 80px;
+
+      .weak-winds {
+        margin: 0 30px;
+      }
+
+      .active {
+        background: rgba(255,161,48,1);
+      }
     }
   }
 </style>
 
 <script>
-import BreadNav from '@/components/common/BreadNav'
-import defaultPhoto from '@/assets/image/default_photo.png'
-import netSet from '@/assets/image/net_set.png'
-import arrow from '@/assets/image/arrow.png'
-import wallpaperSet from '@/assets/image/wallpaper_set.png'
-import manageSet from '@/assets/image/manage_set.png'
 
 export default {
-  components: {
-    BreadNav
-  },
-
   data () {
     return {
-      breadData: {
-        name: '系统设置',
-        url: '/'
-      },
-      defaultPhoto,
-      netSet,
-      arrow,
-      setDatas: [{
-        icon: netSet,
-        name: '无线局域网'
+      modelDatas: [{
+        icon: '',
+        name: '强风',
+        model: 'high',
+        className: 'high-winds',
+        isActive: false
       }, {
-        icon: wallpaperSet,
-        name: '待机壁纸'
+        icon: '',
+        name: '低风',
+        model: 'weak',
+        className: 'weak-winds',
+        isActive: false
       }, {
-        icon: manageSet,
-        name: '应用管理'
-      }, {
-        icon: manageSet,
-        name: '飞行模式'
+        icon: '',
+        name: '清洗',
+        model: 'clean',
+        className: 'clean',
+        isActive: false
       }]
+    }
+  },
+  methods: {
+    selectModel (item) {
+      this.modelDatas.forEach(model => {
+        model.isActive = model.name === item.name
+      })
     }
   }
 }

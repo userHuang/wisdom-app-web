@@ -54,6 +54,7 @@ import MessageCard from '@/components/home/MessageCard'
 import Service from '@/services/contract'
 import { mapGetters, mapActions, mapState } from 'vuex'
 import LampblackMachine from '@/components/device/lampblackMachine'
+import ConnectLoad from '@/components/device/connectLoad'
 
 export default {
   name: 'Home',
@@ -63,7 +64,8 @@ export default {
     Slide,
     HomeCard,
     MessageCard,
-    LampblackMachine
+    LampblackMachine,
+    ConnectLoad
   },
 
   data () {
