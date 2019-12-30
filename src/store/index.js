@@ -4,7 +4,8 @@ import * as actions from './actions'
 import * as getters from './getters'
 import * as mutations from './mutations'
 
-import ceshi from './modules/home/ceshi'
+import ceshi from './modules/home/ceshi' // 测试
+import controll from './modules/controll/index' // 快捷控制
 
 const debug = process.env.NODE_ENV !== 'production'
 
@@ -24,6 +25,7 @@ export default new Vuex.Store({
   getters,
   mutations,
   modules: {
-    ceshi
+    ceshi,
+    controll
   }
 })

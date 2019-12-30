@@ -2,8 +2,11 @@
   <div class="header-page">
     <div class="time">11:16</div>
     <div class="status-icons">
-      <span class="item" v-for="item in icons" :key="item.src">
+      <span class="item" v-for="item in icons" :key="item.src" v-show="getStatus(item.name)">
         <img :src="item.src" alt="icon" />
+      </span>
+      <span class="item">
+        <img :src="getVolumeIcon" alt="icon" />
       </span>
       <span class="item">19%</span>
       <span class="item">
@@ -63,9 +66,11 @@
 </style>
 
 <script>
+import { mapGetters } from 'vuex'
 import Battery from '@/components/common/Battery'
 import unconnectIcon from '@/assets/image/unconnect_icon.png'
 import unvoiceIcon from '@/assets/image/unvoice_icon.png'
+import volume from '@/assets/image/volume.png'
 import voiceHelperIcon from '@/assets/image/voice_helper.png'
 
 export default {
@@ -73,13 +78,33 @@ export default {
   components: { Battery },
   data () {
     return {
+      volume,
+      unvoiceIcon,
       icons: [{
-        src: unconnectIcon
+        src: unconnectIcon,
+        name: 'network'
       }, {
-        src: voiceHelperIcon
-      }, {
-        src: unvoiceIcon
-      }]
+        src: voiceHelperIcon,
+        name: 'bluetooth'
+      }],
+      voiceIcon: volume
+    }
+  },
+
+  computed: {
+    ...mapGetters('controll', ['getControllValue']),
+
+    getVolumeIcon () {
+      const data = this.getControllValue() || { volume: 0 }
+      return data.volume === 0 ? this.unvoiceIcon : this.voiceIcon
+    }
+  },
+
+  methods: {
+    getStatus (name) {
+      const data = this.getControllValue()
+      const value = data[name]
+      return value !== undefined ? value : true
     }
   }
 }

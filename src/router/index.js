@@ -6,33 +6,33 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/', // 首页
       meta: {
         keepAlive: true // 需要缓存
       },
       component: r => require(['@/pages/home'], r)
     },
     {
-      path: '/controll',
+      path: '/controll', // 快捷设置
       component: r => require(['@/pages/controll'], r),
       meta: {
-        keepAlive: true // 需要缓存
+        keepAlive: true
       }
     },
     {
-      path: '/skyApp',
+      path: '/skyApp', // 小维智联
       component: r => require(['@/pages/skyApp'], r)
     },
     {
-      path: '/systemApp',
+      path: '/systemApp', // 应用服务
       component: r => require(['@/pages/systemApp'], r)
     },
     {
-      path: '/settings',
+      path: '/settings', // 系统设置
       component: r => require(['@/pages/personalSet'], r)
     },
     {
-      path: '/washingMachine',
+      path: '/washingMachine', // 洗碗机
       component: r => require(['@/pages/deviceDetail/washingMachine'], r)
     }
   ]

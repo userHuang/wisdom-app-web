@@ -105,7 +105,7 @@ export default {
   },
 
   methods: {
-    // 存储数据到vuex
+    // 存储数据到store
     // ...mapActions('ceshi', ['getList']),
 
     // async init () {
