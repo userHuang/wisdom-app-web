@@ -1,13 +1,17 @@
 <template>
   <div class="message-card-page">
-    <div class="card-item" v-for="item in appData" :key="item.name">
-      <span class="img">
-        <img :src="item.src" alt="icon"/>
-      </span>
-      <title class="device-name">{{item.name}}</title>
-      <span class="nums" v-if="item.name === '最新留言' && item.num">
-        <num-tips :value="item.num"></num-tips>
-      </span>
+    <div v-for="item in appData" :key="item.name">
+      <router-link :to="`${item.url}`">
+        <div class="card-item">
+          <span class="img">
+            <img :src="item.icon" alt="icon"/>
+          </span>
+          <title class="device-name">{{item.name}}</title>
+          <span class="nums" v-if="item.name === '最新留言' && item.num">
+            <num-tips :value="item.num"></num-tips>
+          </span>
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -73,20 +77,21 @@ export default {
     return {
       appData: [{
         name: '发现新版本 1.1.2',
-        src: updateIcon
+        icon: updateIcon
       }, {
         name: '最新留言',
-        src: messageIcon,
-        num: 4
+        icon: messageIcon,
+        num: 4,
+        url: '/messageBoard'
       }, {
         name: '微波炉预约已取消',
-        src: tipsIcon
+        icon: tipsIcon
       }, {
         name: '系统设置1',
-        src: updateIcon
+        icon: updateIcon
       }, {
         name: '应用服务1',
-        src: messageIcon
+        icon: messageIcon
       }]
     }
   }

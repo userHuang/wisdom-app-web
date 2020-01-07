@@ -34,6 +34,10 @@ export default new Router({
     {
       path: '/washingMachine', // 洗碗机
       component: r => require(['@/pages/deviceDetail/washingMachine'], r)
+    },
+    {
+      path: '/messageBoard', // 留言板
+      component: r => require(['@/pages/message/messageBoard'], r)
     }
   ]
 })
