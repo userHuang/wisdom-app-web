@@ -9,8 +9,8 @@ import controll from './modules/controll/index' // 快捷控制
 
 const debug = process.env.NODE_ENV !== 'production'
 
-if (debug) Vue.use(Vuex)
-
+// if (debug) Vue.use(Vuex)
+Vue.use(Vuex)
 const state = {
   app: {
     userInfo: {},

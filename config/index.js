@@ -4,18 +4,6 @@
 
 const path = require('path')
 
-
-function getEvn () {
-  console.log('----getEvn-------')
-  if (process.env.CODE_ENV === 'dev' || process.env.CODE_ENV === 'local') {
-    return 'dev'
-  } else if (process.env.CODE_ENV === 'beta') {
-    return 'qa'
-  } else {
-    return ''
-  }
-}
-
 module.exports = {
   dev: {
 
@@ -50,17 +38,8 @@ module.exports = {
     cssSourceMap: true,
 
     chainWebpack: config => {
-      console.log('====config=====')
       config.plugin('define').tap(args => {
         args[0]['process.env'].CODE_ENV = `"${process.env.CODE_ENV}"`
-        return args
-      })
-
-      config.plugin('html-index').tap(args => {
-        console.log(getEvn(), '=====ss====')
-        Object.assign(args[0], {
-          env: getEvn()
-        })
         return args
       })
     }
@@ -73,7 +52,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
 
     /**
      * Source Maps
