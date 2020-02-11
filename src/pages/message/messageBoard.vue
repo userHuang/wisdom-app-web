@@ -1,9 +1,9 @@
 <template>
   <div class="message-board-page">
     <bread-nav :bread-data="breadData" :sidebar="true"></bread-nav>
-    <section class="message-list">
+    <section class="message-list" v-if="messages.length > 0">
       <div class="messages" :class="{'messages-true': message.content.length > 0}" v-for="(message, index) in messages" :key="index">
-        <div class="date" v-if="message.content.length > 0">
+        <div class="date" v-show="message.content.length > 0">
           <span class="month">{{message.month}}</span>
           <span class="time">{{message.time}}</span>
         </div>
@@ -12,6 +12,10 @@
           <span class="seconds">{{item.seconds}}s</span>
         </div>
       </div>
+    </section>
+    <section v-else>
+      <no-content></no-content>
+      <div class="add-message-btn">添加留言</div>
     </section>
     <van-popup v-model="isShow" position="bottom" :style="{ height: '200px', background: 'rgba(53,53,63,1)' }">
       <div class="clear" @click="clearMessage">清空留言</div>
@@ -24,6 +28,8 @@
   .message-board-page {
     font-size: 0px;
     position: relative;
+    width: 720px;
+    height: 660px;
 
     .message-list {
       padding: 30px 20px;
@@ -56,11 +62,11 @@
         margin-bottom: 40px;
         color: #FFF;
         line-height: 80px;
-        user-select: none
+        user-select: none;
 
         .icon {
-          width:80px;
-          height:80px;
+          width: 80px;
+          height: 80px;
           display: inline-block;
           vertical-align: top;
           margin-left: 10px;
@@ -84,6 +90,25 @@
       }
     }
 
+    /deep/ .no-content-component {
+      margin-top: 160px;
+    }
+
+    .add-message-btn {
+      position: absolute;
+      bottom: 120px;
+      width: 290px;
+      height: 80px;
+      text-align: center;
+      left: 215px;
+      border-radius: 40px;
+      background:rgba(255,161,48,1);
+      font-size:32px;
+      font-family:NotoSansHans-Medium,NotoSansHans;
+      line-height: 70px;
+      color: #FFF;
+    }
+
     .van-popup--bottom {
       overflow: hidden;
       .clear, .cancle{
@@ -104,14 +129,18 @@
 </style>
 
 <script>
-import 'vant/lib/Popup/style'
-import { Popup } from 'vant'
+import 'vant/lib/toast/style'
+import 'vant/lib/popup/style'
+import { Popup, Toast } from 'vant'
 import BreadNav from '@/components/common/BreadNav'
+import NoContent from '@/components/common/NoContent'
+import ToastPassed from '@/assets/image/toast_passed.png'
 
 export default {
   components: {
     BreadNav,
-    'van-popup': Popup,
+    NoContent,
+    'van-popup': Popup
   },
 
   data () {
@@ -139,18 +168,6 @@ export default {
           id: 3,
           voice: '',
           seconds: 40
-        }]
-      }, {
-        month: '1月5日',
-        time: '18:54',
-        content: [{
-          id: 4,
-          voice: '',
-          seconds: 44
-        },{
-          id: 5,
-          voice: '',
-          seconds: 50
         }]
       }, {
         month: '1月5日',
@@ -186,7 +203,15 @@ export default {
     clearMessage () {
       const datas = this.messages[this.parentIndex].content.filter(item => item.id !== this.selectedID)
       this.messages[this.parentIndex].content = datas
+      this.messages = this.messages.filter(item => item.content.length > 0)
       this.isShow = false
+      Toast.loading({
+        className: 'xui-toast',
+        message: '已清除',
+        forbidClick: true,
+        icon: ToastPassed,
+        duration: 1000,
+      })
     }
   }
 }

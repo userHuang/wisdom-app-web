@@ -162,20 +162,25 @@
         }, this.interval)
       },
       starDom() {
-        if (!document.querySelector('.' + this.className)) {
+        let swiper = document.querySelector('.' + this.className)
+        if (!swiper) {
           this.clearTimeOut()
           return
         }
-        var SlideDom = document.querySelector('.' + this.className).getElementsByClassName('wh_slide')
-        this.slidesLength = SlideDom.length
+        let slideDom = swiper.getElementsByClassName('wh_slide')
+        this.slidesLength = slideDom.length
         if (this.slidesLength > 1) {
-          var cloneDom1 = SlideDom[0].cloneNode(true) //向最后append
-          var cloneDom2 = SlideDom[this.slidesLength - 1].cloneNode(true) //向最前append
-          document.querySelector('.' + this.className).insertBefore(cloneDom2, SlideDom[0])
-          document.querySelector('.' + this.className).appendChild(cloneDom1)
-          this._width = document.querySelector('.' + this.className).offsetWidth
-          this.dom = document.querySelector('.' + this.className).style
+          let cloneDomFirst = slideDom[0].cloneNode(true) //向最后append
+          let cloneDomLast = slideDom[this.slidesLength - 1].cloneNode(true) //向最前append
+          swiper.insertBefore(cloneDomLast, slideDom[0])
+          swiper.appendChild(cloneDomFirst)
+          this._width = swiper.offsetWidth
+          this.dom = swiper.style
+          cloneDomFirst = null
+          cloneDomLast = null
         }
+        swiper = null
+        slideDom = null
       },
       clearTimeOut() {
         this.auto = false

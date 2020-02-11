@@ -81,7 +81,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -98,5 +98,33 @@ export default {
 }
 a {
   text-decoration: none;
+}
+
+body {
+  /deep/ .xui-toast {
+    width: 300px;
+    height: 300px;
+    background: rgba(0,0,0,0.8);
+    border-radius: 20px;
+
+    .van-loading {
+      .van-loading__spinner {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    .van-icon {
+      .van-image {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    .van-toast__text {
+      margin-top: 40px;
+      font-size: 32px;
+    }
+  }
 }
 </style>

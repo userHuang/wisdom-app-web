@@ -75,9 +75,10 @@ export default {
       const touch = event.touches ? event.touches[0] : event
       this.position.x = touch.clientX
       this.position.y = touch.clientY
-      const moveDiv = this.$refs.moveDiv
+      let moveDiv = this.$refs.moveDiv
       this.downX = moveDiv.offsetLeft
       this.downY = moveDiv.offsetTop
+      moveDiv = null
     },
     move () {
       if(this.flags){
@@ -89,9 +90,10 @@ export default {
         if (xPum < -5 || xPum > 625 || yPum < -5 || yPum > 625) {
           return
         }
-        const moveDiv = this.$refs.moveDiv
+        let moveDiv = this.$refs.moveDiv
         moveDiv.style.left = xPum + 'px'
         moveDiv.style.top = yPum  + 'px'
+        moveDiv = null
       }
     },
     //鼠标释放时候的函数
