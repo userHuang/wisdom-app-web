@@ -1,6 +1,6 @@
 <template>
   <div class="header-page">
-    <div class="time">11:16</div>
+    <div class="time"><local-date timeType="time"></local-date></div>
     <div class="status-icons">
       <span class="item" v-for="item in icons" :key="item.src" v-show="getStatus(item.name)">
         <img :src="item.src" alt="icon" />
@@ -67,6 +67,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import LocalDate from '@/components/common/LocalDate'
 import Battery from '@/components/common/Battery'
 import unconnectIcon from '@/assets/image/unconnect_icon.png'
 import unvoiceIcon from '@/assets/image/unvoice_icon.png'
@@ -75,7 +76,7 @@ import voiceHelperIcon from '@/assets/image/voice_helper.png'
 
 export default {
   name: 'Header',
-  components: { Battery },
+  components: { Battery , LocalDate},
   data () {
     return {
       volume,

@@ -1,10 +1,14 @@
 <template>
   <div class="home-card-page">
     <div class="time-info">
-      <div class="time">11:16</div>
+      <div class="time">
+        <local-date timeType="time"></local-date>
+      </div>
       <div class="month-week">
-        <span class="month">11月22日</span>
-        <span>星期五</span>
+        <span class="month">
+          <local-date timeType="date"></local-date>
+        </span>
+        <span><local-date timeType="week"></local-date></span>
       </div>
     </div>
     <div class="app-info">
@@ -36,8 +40,10 @@
 
       .time {
         height: 120px;
-        font-size:120px;
+        font-size: 120px;
+        line-height: 120px;
         text-align: center;
+        font-family: DINPro-Regular,DINPro;
       }
 
       .month-week {
@@ -47,6 +53,7 @@
 
         .month {
           margin-right: 20px;
+          display: inline-block;
         }
       }
     }
@@ -57,7 +64,7 @@
       .item {
         width: 200px;
         height: 200px;
-        background:rgba(255,255,255,0.05);
+        background: rgba(255,255,255,0.05);
         display: inline-block;
         margin-left: 30px;
         text-align: center;
@@ -86,12 +93,17 @@
 </style>
 
 <script>
+import LocalDate from '@/components/common/LocalDate'
 import xiaoweiIcon from '@/assets/image/xiaowei_icon.png'
 import deviceIcon from '@/assets/image/device_icon.png'
 import systemIcon from '@/assets/image/system_icon.png'
 
 export default {
   name: 'HomeCard',
+
+  components: {
+    LocalDate
+  },
 
   data () {
     return {

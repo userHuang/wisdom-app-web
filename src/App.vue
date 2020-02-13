@@ -45,7 +45,7 @@ export default {
 
   created () {
     const EventSource = window.EventSource || NativeEventSource || EventSourcePolyfill
-    const es = new EventSource("http://192.168.4.126:8081/events.php")
+    const es = new EventSource("http://192.168.0.105:8081/events.php")
 
     es.addEventListener('message', (e) => {
       if (e) {
